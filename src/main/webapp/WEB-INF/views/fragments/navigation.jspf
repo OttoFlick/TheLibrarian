@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <span class="navbar-brand mb-0 h1">The Librarian</span>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/book/list">Books</a>
+      </li>
+      <c:if test="${not empty user.employee}">
+        <li class="nav-item active">
+            <a class="nav-link" href="/book/orders">Orders</a>
+        </li>
+      </c:if>
+    </ul>
+    <c:if test="${empty user.id}">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item active"><a class="nav-link" href="/register">Register</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/login">Login</a></li>
+        </ul>
+    </c:if>
+    <c:if test="${not empty user.id}">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item active"><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+    </c:if>
+  </div>
+</nav>
