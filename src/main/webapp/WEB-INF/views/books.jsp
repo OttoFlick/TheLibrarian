@@ -29,7 +29,7 @@
             <td>${book.author.firstName} ${book.author.lastName}</td>
             <td>${book.category.name}</td>
             <td>
-                <a class="btn btn-secondary" href="/borrow/${book.id}">Borrow</a>
+                <a class="btn btn-secondary btn-sm" href="/borrow/${book.id}">Borrow</a>
             </td>
         </tr>
         </c:forEach>
