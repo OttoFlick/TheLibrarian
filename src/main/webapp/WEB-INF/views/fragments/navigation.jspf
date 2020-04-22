@@ -7,8 +7,13 @@
         <a class="nav-link" href="/">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/book/list">Books</a>
+        <a class="nav-link" href="/book/list">Search</a>
       </li>
+      <c:if test="${not empty user.id}">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item active"><a class="nav-link" href="/myBooks">My Books</a></li>
+        </ul>
+      </c:if>
       <c:if test="${not empty user.employee}">
         <li class="nav-item active">
             <a class="nav-link" href="/book/orders">Orders</a>

@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <c:if test="${empty books}">
-        <td colspan="3">No books found</td>
+        <td colspan="4">No books found</td>
         </c:if>
 
         <c:forEach items="${books}" var="book">
@@ -29,7 +29,7 @@
             <td>${book.author.firstName} ${book.author.lastName}</td>
             <td>${book.category.name}</td>
             <td>
-                <a class="btn btn-secondary btn-sm" href="/borrow/${book.id}">Borrow</a>
+                <a class="btn btn-primary btn-sm" href="/borrow/${book.id}">Borrow</a>
             </td>
         </tr>
         </c:forEach>

@@ -2,6 +2,9 @@ package pl.coderslab.library.app;
 
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -14,6 +17,7 @@ import pl.coderslab.library.entity.User;
 
 import javax.persistence.EntityManagerFactory;
 import java.nio.charset.StandardCharsets;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,6 +69,20 @@ public class AppConfig implements WebMvcConfigurer {
     @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public User getUser() {
         return new User();
+    }
+
+    @Bean
+    public FormattingConversionService conversionService() {
+        DefaultFormattingConversionService conversionService =
+                new DefaultFormattingConversionService(false);
+
+        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
+        //registrar.setDateFormatter(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        registrar.registerFormatters(conversionService);
+
+        return conversionService;
     }
 
     /*@Override

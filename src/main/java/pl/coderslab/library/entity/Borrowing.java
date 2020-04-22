@@ -1,6 +1,10 @@
 package pl.coderslab.library.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,10 +13,12 @@ public class Borrowing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private LocalDateTime rentalDate;
-    private LocalDateTime returnDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate rentalDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate returnDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Book book;
     @ManyToOne
     private Customer customer;
@@ -22,10 +28,12 @@ public class Borrowing {
     public Borrowing() {
     }
 
-    public Borrowing(Integer id, LocalDateTime rentalDate, LocalDateTime returnDate) {
-        this.id = id;
+    public Borrowing(LocalDate rentalDate, LocalDate returnDate, Book book, Customer customer, Employee employee) {
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
+        this.book = book;
+        this.customer = customer;
+        this.employee = employee;
     }
 
     public Integer getId() {
@@ -36,19 +44,19 @@ public class Borrowing {
         this.id = id;
     }
 
-    public LocalDateTime getRentalDate() {
+    public LocalDate getRentalDate() {
         return rentalDate;
     }
 
-    public void setRentalDate(LocalDateTime rentalDate) {
+    public void setRentalDate(LocalDate rentalDate) {
         this.rentalDate = rentalDate;
     }
 
-    public LocalDateTime getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDateTime returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -74,5 +82,17 @@ public class Borrowing {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    @Override
+    public String toString() {
+        return "Borrowing{" +
+                "id=" + id +
+                ", rentalDate=" + rentalDate +
+                ", returnDate=" + returnDate +
+                ", book=" + book +
+                ", customer=" + customer +
+                ", employee=" + employee +
+                '}';
     }
 }

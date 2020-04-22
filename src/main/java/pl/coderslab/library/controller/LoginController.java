@@ -36,6 +36,9 @@ public class LoginController {
         }
 
         user.setId(u.getId());
+        user.setLogin(u.getLogin());
+        user.setPassword(u.getPassword());
+        user.setCustomer(u.getCustomer());
         user.setEmployee(u.getEmployee());
 
         return "redirect:/";
