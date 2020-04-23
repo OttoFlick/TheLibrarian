@@ -21,12 +21,9 @@ public class BookController {
 
     @GetMapping("/list")
     public String getList(Model model) {
-        if(user.getId() == null){
-            return "redirect:/login";
-        }
-
         model.addAttribute("search", new BookSearch());
         model.addAttribute("books", this.bookRepository.findAll());
+
         return "books";
     }
 

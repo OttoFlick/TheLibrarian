@@ -12,6 +12,9 @@ import pl.coderslab.library.repository.BorrowRepository;
 import pl.coderslab.library.repository.UserRepository;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -58,5 +61,18 @@ public class BorrowBookController {
         return "mybooks";
     }
 
+    @RequestMapping("/borrowings")
+    public String borrowings(Model model){
+        Collection<Borrowing> borrowings = borrowRepository.findAllActive();
+        model.addAttribute("borrowings", borrowings);
 
+        return "borrowings";
+    }
+
+    @RequestMapping("/return/{borrowingId}")
+    public String returnBook(@PathVariable int borrowingId, Model model){
+        borrowRepository.returnBook(borrowingId, LocalDate.now());
+
+        return "redirect:/borrowings";
+    }
 }

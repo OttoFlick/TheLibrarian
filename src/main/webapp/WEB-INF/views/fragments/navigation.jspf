@@ -6,17 +6,17 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Home</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/book/list">Search</a>
-      </li>
-      <c:if test="${not empty user.id}">
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item active"><a class="nav-link" href="/myBooks">My Books</a></li>
-        </ul>
+      <c:if test="${not empty user.customer}">
+          <li class="nav-item active">
+            <a class="nav-link" href="/book/list">Search</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/myBooks">My Books</a>
+          </li>
       </c:if>
       <c:if test="${not empty user.employee}">
         <li class="nav-item active">
-            <a class="nav-link" href="/book/orders">Orders</a>
+            <a class="nav-link" href="/book/rentals">Rentals</a>
         </li>
       </c:if>
     </ul>

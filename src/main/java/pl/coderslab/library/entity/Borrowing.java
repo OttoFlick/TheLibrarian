@@ -17,12 +17,14 @@ public class Borrowing {
     private LocalDate rentalDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate returnDate;
+    @Enumerated(EnumType.STRING)
+    private BorrowingStatus status = BorrowingStatus.OPEN;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Book book;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Employee employee;
 
     public Borrowing() {
@@ -34,6 +36,10 @@ public class Borrowing {
         this.book = book;
         this.customer = customer;
         this.employee = employee;
+    }
+
+    public boolean isOverdue(){
+        return LocalDate.now().isAfter(returnDate);
     }
 
     public Integer getId() {
@@ -84,12 +90,21 @@ public class Borrowing {
         this.employee = employee;
     }
 
+    public BorrowingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BorrowingStatus status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Borrowing{" +
                 "id=" + id +
                 ", rentalDate=" + rentalDate +
                 ", returnDate=" + returnDate +
+                ", status=" + status +
                 ", book=" + book +
                 ", customer=" + customer +
                 ", employee=" + employee +
